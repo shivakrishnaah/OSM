@@ -1,6 +1,7 @@
 'use strict';
 
 var L = require('leaflet');
+var h3 = require("h3-js");
 var Geocoder = require('leaflet-control-geocoder');
 var LRM = require('leaflet-routing-machine');
 var locate = require('leaflet.locatecontrol');
@@ -93,7 +94,30 @@ function makeIcon(i, n) {
   }
 }
 var plan = new ReversablePlan([], {
-  geocoder: L.Control.Geocoder.nominatim(),
+  geocoder: L.Control.Geocoder.nominatim({
+    serviceUrl: 'https://nominatim.openstreetmap.org/',
+    htmlTemplate: function htmlTemplate(r) {
+      var address = r.address;
+      var className;
+      var parts = [];
+
+      if (address.road || address.building) {
+        parts.push('{building} {road} {house_number}');
+      }
+
+      if (address.city || address.town || address.village || address.hamlet) {
+        className = parts.length > 0 ? 'leaflet-control-geocoder-address-detail' : '';
+        parts.push('<span class="' + className + '">{postcode} {city} {town} {village} {hamlet}</span>');
+      }
+
+      if (address.state || address.country) {
+        className = parts.length > 0 ? 'leaflet-control-geocoder-address-context' : '';
+        parts.push('<span class="' + className + '">{state} {country}</span>');
+      }
+
+      return template(parts.join('<br/>'), address);
+    }
+  }),
   routeWhileDragging: true,
   createMarker: function(i, wp, n) {
     var options = {

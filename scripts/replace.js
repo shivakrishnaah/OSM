@@ -15,9 +15,9 @@ for (const filepath of [leafletOptions, debug]) {
 
   // Define Environment variables
   const ZOOM = process.env.OSRM_ZOOM || 13
-  const LABEL = process.env.OSRM_LABEL || 'Car (fastest)'
+  const LABEL = process.env.OSRM_LABEL || 'Car'
   const CENTER = process.env.OSRM_CENTER || '38.8995, -77.0269'
-  const BACKEND = process.env.OSRM_BACKEND || 'https://router.project-osrm.org'
+  const BACKEND = 'http://35.221.249.253'
   const LANGUAGE = process.env.OSRM_LANGUAGE || 'en'
   const DEFAULT_LAYER = process.env.OSRM_DEFAULT_LAYER || 'streets'
   const MAPBOX_TOKEN = process.env.OSRM_MAPBOX_TOKEN || 'pk.eyJ1IjoibXNsZWUiLCJhIjoiclpiTWV5SSJ9.P_h8r37vD8jpIH1A6i1VRg'
