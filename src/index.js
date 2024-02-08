@@ -94,30 +94,7 @@ function makeIcon(i, n) {
   }
 }
 var plan = new ReversablePlan([], {
-  geocoder: L.Control.Geocoder.nominatim({
-    serviceUrl: 'https://nominatim.openstreetmap.org/',
-    htmlTemplate: function htmlTemplate(r) {
-      var address = r.address;
-      var className;
-      var parts = [];
-
-      if (address.road || address.building) {
-        parts.push('{building} {road} {house_number}');
-      }
-
-      if (address.city || address.town || address.village || address.hamlet) {
-        className = parts.length > 0 ? 'leaflet-control-geocoder-address-detail' : '';
-        parts.push('<span class="' + className + '">{postcode} {city} {town} {village} {hamlet}</span>');
-      }
-
-      if (address.state || address.country) {
-        className = parts.length > 0 ? 'leaflet-control-geocoder-address-context' : '';
-        parts.push('<span class="' + className + '">{state} {country}</span>');
-      }
-
-      return template(parts.join('<br/>'), address);
-    }
-  }),
+  geocoder: L.Control.Geocoder.nominatim(),
   routeWhileDragging: true,
   createMarker: function(i, wp, n) {
     var options = {
