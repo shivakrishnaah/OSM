@@ -57,11 +57,12 @@ module.exports = {
     path: 'http://35.221.249.253/route/v1'
   }],
   layer: [{
-    'openstreetmap.org': osm,
-
+    'openstreetmap.org': osm
   }],
   overlay: {
-    'Bike': bike
+    'Hiking': hiking,
+    'Bike': bike,
+    'Small Components': small_components
   },
   baselayer: {
     one: streets,
