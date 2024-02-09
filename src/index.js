@@ -93,8 +93,16 @@ function makeIcon(i, n) {
     });
   }
 }
+var geocoder_test = L.Control.Geocoder.nominatim();
+geocoder_test.geocode = function (query, cb, context) {
+  if(h3.isValidCell(query)) {
+    query = h3.cellToLatLng(query);
+    query = query.join(',');
+  }
+  L.Control.Geocoder.nominatim().geocode(query, cb, context);
+}
 var plan = new ReversablePlan([], {
-  geocoder: L.Control.Geocoder.nominatim(),
+  geocoder: geocoder_test,
   routeWhileDragging: true,
   createMarker: function(i, wp, n) {
     var options = {
@@ -217,8 +225,7 @@ lrmControl.on('routeselected', function(e) {
     properties: {
       name: route.name,
       copyright: {
-        author: 'OpenStreetMap contributors',
-        license: 'http://www.openstreetmap.org/copyright'
+        author: 'ONDC'
       },
       link: {
         href: window.document.location.href,
