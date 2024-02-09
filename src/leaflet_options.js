@@ -57,16 +57,11 @@ module.exports = {
     path: 'http://35.221.249.253/route/v1'
   }],
   layer: [{
-    'Mapbox Streets': streets,
-    'Mapbox Outdoors': outdoors,
-    'Mapbox Streets Satellite': satellite,
     'openstreetmap.org': osm,
-    'openstreetmap.de.org': osm_de
+
   }],
   overlay: {
-    'Hiking': hiking,
-    'Bike': bike,
-    'Small Components': small_components
+    'Bike': bike
   },
   baselayer: {
     one: streets,
